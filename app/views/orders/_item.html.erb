@@ -1,0 +1,31 @@
+<tr>
+  <td>
+    <%= image_tag product.image.tiny %>
+  </td>
+  <td>
+    <h4><%= product.name %></h4>
+    <br>
+    <p><%= product.description %></p>
+  </td>
+  <td>
+    <%= item.item_price_cents / 100.0 %>
+  </td>
+  <td>
+    <%= item.quantity %>
+  </td>
+  <td>
+    <%= item.total_price_cents / 100.0 %>
+  </td>
+</tr>
+
+<!--
+
+  create_table "line_items", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "product_id"
+    t.integer  "quantity"
+    t.integer  "item_price_cents"
+    t.integer  "total_price_cents"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end -->
