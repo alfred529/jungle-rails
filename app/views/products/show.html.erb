@@ -24,6 +24,33 @@
           <dd><%= @product.price %></dd>
         </dl>
       </div>
+
+      <% if current_user %>
+        <div>
+          <% @review = Review.new() %>
+          <%= form_for [@product, @review] do |f| %>
+            Review: <%= f.text_area :description %><br>
+            Rating: <%= f.select :rating, [1, 2, 3, 4, 5]%><br>
+            <%= submit_tag "Submit" %>
+          <%  end %>
+        </div>
+      <% end %>
+
+      <% @product.reviews.reverse_order.each do |review| %>
+        <div class="col-sm-8">
+          <dl class="dl-horizontal">
+            <dt>User ID:</dt>
+            <dd><%= review.user_id %></dd>
+            <dt>Review:</dt>
+            <dd><%= review.description %></dd>
+            <dt>Rating:</dt>
+            <dd><%= review.rating %></dd>
+            <% if review.user_id == current_user.id %>
+              <dd><%= link_to 'Destroy', product_review_path(@product.id, review.id), method: :delete%></dd>
+            <% end %>
+          </dl>
+        </div>
+      <% end %>
     </div>
 
   </article>

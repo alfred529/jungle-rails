@@ -35,6 +35,7 @@ puts "Re-creating Products ..."
 
 Product.destroy_all
 
+
 cat1.products.create!({
   name:  'Men\'s Classy shirt',
   description: Faker::Hipster.paragraph(4),
@@ -132,5 +133,54 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+## REVIEWS
+
+puts "Re-creating Reviews ..."
+
+
+
+u1 = User.create(name: "Alfred", email: "alfred@home.com", password_digest: "abc")
+u2 = User.create(name: "Kelvin", email: "kelvin@home.com", password_digest: "def")
+u3 = User.create(name: "Bobby", email: "bobby@home.com", password_digest: "hij")
+
+
+p1 = Product.last
+p2 = Product.first
+
+
+r1 = p1.reviews.create!({
+  user: u1,
+  description: "This shit is the bomb",
+  rating: 5
+})
+
+r2 = p2.reviews.create!({
+  user: u2,
+  description: "Best thing I've bought in a while",
+  rating: 4
+})
+
+r3 = p1.reviews.create!({
+  user: u3,
+  description: "WOW WOW WOW I bought a second one for my dog",
+  rating: 4
+})
+
+r4 = p2.reviews.create!({
+  user: u1,
+  description: "Super useful around the house",
+  rating: 3
+})
+
+r5 = p1.reviews.create!({
+  user: u2,
+  description: "Looking forward to wearing it in",
+  rating: 3
+})
 
 puts "DONE!"
+puts r1.inspect
+puts r2.inspect
+puts r3.inspect
+puts r4.inspect
+puts r5.inspect
